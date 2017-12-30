@@ -44,7 +44,13 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         activePlayer = activePlayer === 0 ? 1 : 0;
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('active');
         */
+    } else if (die === 6 && lastDice === 6) {
+        document.getElementById('score-' + activePlayer).textContent = '0';
+        dontRepeatYoSelfNextPlayer();
+        currDOM.textContent = roundScore;
     } else {
+        if (die === 6) lastDice = 6;
+        else lastDice = die;
         roundScore += die;
         currDOM.textContent = roundScore;
     }
@@ -64,18 +70,10 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     scoreDOM.textContent = scores[activePlayer];
     var scoreToWin = document.getElementById('Determine-Score').value;
     console.log(scoreToWin);
-    var winningScore = 0;
-    if (scoreToWin) {
-        winningScore = scoreToWin;
-    } else {
-        winningScore = 100;
-    }
-
-
     // Winner Setting
     if (state) {
         init();
-    }else if (scores[activePlayer] >= winningScore) {
+    }else if (scores[activePlayer] >= 100) {
         document.querySelector('#name-' + activePlayer).textContent = "Winner!";
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
         document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
@@ -108,7 +106,6 @@ function init() {
     scores = [0, 0];
     activePlayer = 0;
     roundScore = 0;
-    winningScore = document.getElementById('Determine-Score').value;
 
     // The state of game, if its true we will reset to init;
     state = false;
