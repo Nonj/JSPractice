@@ -136,6 +136,16 @@ function init() {
 }
 
 
+// Challenges:
+
+// 1 - A player loses his entire score when he rolls two sixes in a row.
+// after that, it is the other player's turn.
+
+function twoSixies() {
+    document.getElementById('score-' + activePlayer).textContent = '0';
+
+}
+
 /*
 
 function btn() {
